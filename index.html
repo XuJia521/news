@@ -6,26 +6,87 @@
 <title>新闻</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="新闻">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#D97757">
-<meta http-equiv="refresh" content="0; url=https://www.perplexity.ai/discover">
 <style>
+  * { box-sizing: border-box; }
   html, body {
     margin: 0;
     padding: 0;
     height: 100%;
     background: #D97757;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    padding: 24px;
+    text-align: center;
   }
-  .loader { color: white; font-size: 18px; opacity: 0.85; }
+  h1 {
+    font-family: "Times New Roman", Georgia, serif;
+    font-size: 96px;
+    margin: 0 0 16px;
+    font-weight: bold;
+    line-height: 1;
+  }
+  p {
+    font-size: 17px;
+    margin: 8px 0;
+    opacity: 0.92;
+    max-width: 320px;
+    line-height: 1.5;
+  }
+  .hint {
+    font-size: 14px;
+    opacity: 0.75;
+    margin-top: 32px;
+    max-width: 280px;
+  }
+  button {
+    margin-top: 28px;
+    padding: 14px 36px;
+    font-size: 17px;
+    border: none;
+    border-radius: 999px;
+    background: white;
+    color: #D97757;
+    font-weight: 600;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  button:active { opacity: 0.85; }
 </style>
 </head>
 <body>
-<div class="loader">加载中…</div>
-<script>window.location.replace('https://www.perplexity.ai/discover');</script>
+<h1>N</h1>
+<p>新闻</p>
+<button id="go">进入 Perplexity Discover</button>
+<p class="hint">首次使用：在 Safari 中点击分享按钮，选「添加到主屏幕」。之后从主屏幕图标启动会自动跳转。</p>
+
+<script>
+  var target = 'https://www.perplexity.ai/discover';
+
+  // 检测是否从主屏幕启动（standalone 模式）
+  var isStandalone = window.navigator.standalone === true ||
+                     window.matchMedia('(display-mode: standalone)').matches;
+
+  if (isStandalone) {
+    // 从主屏幕图标启动 → 自动跳转
+    window.location.replace(target);
+  }
+
+  // 浏览器访问 → 显示落地页，等用户点按钮
+  document.getElementById('go').addEventListener('click', function() {
+    window.location.href = target;
+  });
+</script>
 </body>
 </html>
